@@ -5,7 +5,7 @@
 
 	<groupId>top.onceio-plugin</groupId>
 	<artifactId>onceio-mybatis-plugin</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>mybatis-plugin</name>
