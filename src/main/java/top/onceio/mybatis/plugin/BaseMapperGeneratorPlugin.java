@@ -195,19 +195,20 @@ public class BaseMapperGeneratorPlugin extends PluginAdapter {
 
 	private XmlElement createBatchInsert(String tableName, List<IntrospectedColumn> columns) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("      insert into " + tableName+"\n     (");
+		sb.append("insert into " + tableName+"\n    (");
 		for(IntrospectedColumn col:columns) {
 			sb.append(col.getActualColumnName() + ", ");
 		}
 		sb.delete(sb.length()-2,sb.length());
-		sb.append(")\n      values \n");
+		sb.append(")\n    values \n");
 
-		sb.append("<foreach item=\"item\" index=\"index\" collection=\"list\" separator=\",\">\n");
-		sb.append("    (\n");
+		sb.append("    <foreach item=\"item\" index=\"index\" collection=\"list\" separator=\",\">\n");
+		sb.append("        (");
 		for(IntrospectedColumn col:columns) {
 			sb.append("#{item."+col.getActualColumnName()+",jdbcType="+col.getJdbcTypeName()+"}, ");
 		}
-		sb.append("    )\n    </foreach>");
+		sb.delete(sb.length()-2,sb.length());
+		sb.append(")\n    </foreach>");
 		
 		// 产生分页语句前半部分
 		XmlElement batchInsert = new XmlElement("insert");
